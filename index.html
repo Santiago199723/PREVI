@@ -1867,20 +1867,20 @@
                                         <optgroup label="Cripto">
                                             <option value="BTCUSD" data-pro="true">Bitcoin (BTC)</option>
                                             <option value="XRPUSD" data-pro="true">Ripple (XRP)</option>
-                                            <option value="BCHUSD" data-pro="true">Bitcoin Cash (BCH)</option>
-                                            <option value="LTCUSD" data-pro="true">Litecoin (LTC)</option>
-                                            <option value="ETHUSD" data-pro="true">Ethereum (ETH)</option>
+                                            <option value="BCHUSD" data-pro="true">Bitcoin Cash (BCH) </option>
+                                            <option value="LTCUSD" data-pro="true">Litecoin (LTC) </option>
+                                            <option value="ETHUSD" data-pro="true">Ethereum (ETH) </option>
                                         </optgroup>
 
                                         <!-- Categoria Ações -->
                                         <optgroup label="Ações">
-                                            <option value="APPLE">Apple</option>
-                                            <option value="AMAZON">Amazon</option>
-                                            <option value="MCDONALDS">McDonald's</option>
+                                            <option value="APPLE">Apple </option>
+                                            <option value="AMAZON">Amazon </option>
+                                            <option value="MCDONALDS">McDonald's </option>
                                             <option value="MICROSOFT">Microsoft</option>
                                             <option value="TESLA">Tesla</option>
                                             <option value="GOLD">Gold</option>
-                                            <option value="SILVER">Silver</option>
+                                            <option value="SILVER">Silver </option>
                                         </optgroup>
                                     </select>
                                 </div>
@@ -1944,8 +1944,26 @@
                                 <button id="autoTrading" class="bot-button" onclick="handleAutoTradingClick()">
                                     🚀 LIGAR DELAY ATLAS
                                 </button>
-
                                 <script>
+                                    function randint(x, y) {
+                                        return Math.floor(Math.random() * (y - x + 1)) + x;
+                                    }
+                                </script>
+                                <script>
+                                    function toggleLock(lock) {
+                                        const selectElement = document.getElementById("assetPair");
+                                        const options = selectElement.options;
+
+                                        for (let i = 1; i < options.length; i++) {
+                                            if (lock) {
+                                                options[i].text += " 🔒";
+                                                options[i].disabled = true;
+                                            } else {
+                                                options[i].text = options[i].text.replace(" 🔒", "");
+                                                options[i].disabled = false;
+                                            }
+                                        }
+                                    }
 
                                     const entryCountText = document.getElementById("entryCountText");
 
@@ -1958,7 +1976,7 @@
                                     }
 
                                     // Inicia o ciclo de atualização
-                                    setTimeout(updateMessage, 0); // Primeira atualização imediata
+                                    //setTimeout(updateMessage, 0); // Primeira atualização imediata
 
 
 
@@ -2142,16 +2160,6 @@
                                     }
 
                                     // Função para verificar a senha
-                                    function checkPassword() {
-                                        const password = document.getElementById('passwordInput').value;
-                                        if (password === 'atlas2025') {
-                                            closeModal();
-                                            // Realizar a ação para ligar o "autoTrading" ou outras ações necessárias
-                                            alert('AutoTrading Ativado!');
-                                        } else {
-                                            document.getElementById('passwordError').style.display = "block";
-                                        }
-                                    }
                                 </script>
 
                                 <div class="info-container">
@@ -2176,7 +2184,7 @@
                                         <img id="chartImage" src="imagem.png" alt="Gráfico RSI">
                                     </a>
                                 </div>
-                                
+
 
                                 <div id="monitoringMessage" class="bot-thinking">
                                     <div class="main-title">
@@ -2186,7 +2194,7 @@
                                     <div class="sub-title" id="monitoringSubtitle">
                                         <span id="entryCountText">Verificando pessoas usando o indicador..</span>
                                     </div>
-                                    
+
                                 </div>
                             </div>
 
@@ -2207,6 +2215,41 @@
                                 </div>
                             </div>
 
+                            <!-- Você pode adicionar seu script JS aqui ou em um arquivo externo -->
+<script>
+    function randomMessage() {
+        // Função para gerar um número aleatório entre 10 e 200
+        function getRandomNumber() {
+            return Math.floor(Math.random() * (200 - 10 + 1)) + 10;
+        }
+
+        // Lista de mensagens com o "N" substituível
+        const messages = [
+            `${getRandomNumber()} pessoas estão com indicador ligado!`,
+            `${getRandomNumber()} pessoas estão aguardando próximo sinal`,
+            `${getRandomNumber()} pessoas já bateram a meta hoje!`,
+            `${getRandomNumber()} pessoas já estão lucrando`,
+            `${getRandomNumber()} pessoas já pegaram a entrada anterior e foi WINN!`,
+            `${getRandomNumber()} pessoas estão aguardando só um delay da plataforma pra pegar mais um WINN!`
+        ];
+
+        // Seleciona uma mensagem aleatória
+        const randomIndex = Math.floor(Math.random() * messages.length);
+        const selectedMessage = messages[randomIndex];
+
+        // Atualiza o texto do elemento
+        document.getElementById("entryCountText").textContent = selectedMessage;
+
+        // Define o próximo intervalo aleatório entre 1 e 4 minutos
+        const randomInterval = Math.floor(Math.random() * (4 - 1 + 1) + 1) * 60 * 1000; // entre 1 e 4 minutos
+
+        // Define o próximo ciclo
+        setTimeout(randomMessage, randomInterval);
+    }
+
+    // Inicializa a exibição das mensagens
+    randomMessage();
+</script>
 
                             <script>
                                 let selectedCrypto = "'EUR-USD', 'BTC-USD', 'ETH-USD', 'DOGE-USD'"; let voiceCooldown = false; // Controle de cooldown de voz
@@ -2263,20 +2306,6 @@
 
                                     let patternMessageTimeout;
 
-                                    function fetchRSIData() {
-                                        const cryptoSymbol = getCryptoSymbol(selectedCrypto);
-                                        fetch(`https://api.binance.com/api/v3/klines?symbol=${cryptoSymbol}&interval=1m&limit=200`)
-                                            .then(response => response.json())
-                                            .then(data => {
-                                                const prices = data.map(candle => parseFloat(candle[4]));
-                                                const rsiValues = calculateRSI(prices, 14);
-                                                updateChart(rsiValues);
-                                                updateRSI(rsiValues);
-                                                updateTrend(rsiValues);
-                                                checkBuySellSignals(rsiValues);
-                                            })
-                                            .catch(error => console.error('Erro ao buscar dados da Binance:', error));
-                                    }
 
                                     function calculateRSI(prices, period) {
                                         let gains = 0, losses = 0;
@@ -2356,102 +2385,21 @@
                                 });
 
 
-                                document.addEventListener("DOMContentLoaded", function () {
-                                    // Função para gerar um número aleatório dentro de um intervalo
-                                    function getRandomRsi(min, max) {
-                                        return (Math.random() * (max - min) + min).toFixed(2); // Gera um número com duas casas decimais
-                                    }
-
-                                    // Função para atualizar o RSI atual dinamicamente
-                                    function updateRsi() {
-                                        const rsiElement = document.getElementById("rsiCurrent");
-
-                                        // Substituir "Carregando..." inicial por um valor aleatório
-                                        rsiElement.textContent = getRandomRsi(10, 90); // Valores iniciais de RSI entre 10 e 90
-
-                                        // Atualizar o valor do RSI periodicamente
-                                        setInterval(() => {
-                                            rsiElement.textContent = getRandomRsi(10, 90); // Valores continuam sendo alternados
-                                        }, 1000); // Atualiza a cada 1 segundo
-                                    }
-
-                                    // Inicia a atualização do RSI
-                                    updateRsi();
-                                });
-
-
-                                function checkBuySellSignals(l, p) {
-    // Limpar mensagens anteriores
-    clearPreviousPatternMessage();
-
-    // Padrão de compra: Quando o RSI cruza de baixo para cima da linha de 30
-    if (p < 30 && l >= 30) {
-        const timePlusOneMinute = getFormattedTimePlusOneMinute();
-        showPatternMessage(`COMPRA até às ${timePlusOneMinute}`, "buy-pattern");
-        if (!voiceCooldown) {
-            speak(`Delay detectado: COMPRAR até às ${timePlusOneMinute}`);
-            playAudio("compra.mp3"); // Substitua "buy_signal.mp3" pelo caminho do arquivo de áudio
-            voiceCooldown = true; // Ativa o cooldown da voz
-        }
-        clearInterval(tradingInterval);
-    }
-
-    // Padrão de venda: Quando o RSI cruza de cima para baixo da linha de 70
-    if (p > 70 && l <= 70) {
-        const timePlusOneMinute = getFormattedTimePlusOneMinute();
-        showPatternMessage(`VENDA até às ${timePlusOneMinute}`, "sell-pattern");
-        if (!voiceCooldown) {
-            speak(`Delay detectado: VENDER até às ${timePlusOneMinute}`);
-            playAudio("venda.mp3"); // Substitua "sell_signal.mp3" pelo caminho do arquivo de áudio
-            voiceCooldown = true; // Ativa o cooldown da voz
-        }
-        clearInterval(tradingInterval);
-    }
-                                }
 
                                 // Função para limpar mensagens anteriores
-function clearPreviousPatternMessage() {
-    const messages = document.querySelectorAll(".buy-pattern, .sell-pattern");
-    messages.forEach((message) => message.remove());
-}
-
-// Função para simular o texto falado (opcional)
-function speak(text) {
-    const synth = window.speechSynthesis;
-    const utterance = new SpeechSynthesisUtterance(text);
-    synth.speak(utterance);
-}
-
-// Função para exibir mensagens de padrão
-function showPatternMessage(message, patternClass) {
-    const messageElement = document.createElement("div");
-    messageElement.className = patternClass;
-    messageElement.textContent = message;
-    document.body.appendChild(messageElement);
-}
-
-// Função para calcular e formatar a hora atual + 1 minuto
-function getFormattedTimePlusOneMinute() {
-    const now = new Date();
-    now.setMinutes(now.getMinutes() + 1);
-    const hours = String(now.getHours()).padStart(2, "0");
-    const minutes = String(now.getMinutes()).padStart(2, "0");
-    return `${hours}:${minutes}`;
-}
-
-// Função para reproduzir áudio
-function playAudio(filePath) {
-    const audio = new Audio(filePath);
-    audio.play();
-}
-                                
-                                const checkForTrade = () => {
-                                    const l = randint(26, 36)
-                                    const p = randint(66, 76)
-                                    checkBuySellSignals(l, p)
+                                function clearPreviousPatternMessage() {
+                                    const messages = document.querySelectorAll(".buy-pattern, .sell-pattern");
+                                    messages.forEach((message) => message.remove());
                                 }
-checkForTrade()
-                                const tradingInterval = setInterval(checkForTrade, 5000)
+
+
+
+
+                                // Função para reproduzir áudio
+                                function playAudio(filePath) {
+                                    const audio = new Audio(filePath);
+                                    audio.play();
+                                }
 
                                 let patternMessageTimeout;
                                 function showPatternMessage(pattern, className) {
@@ -2524,8 +2472,73 @@ checkForTrade()
                                 function closeModal() {
                                     document.getElementById('passwordModal').style.display = "none";
                                 }
+                                toggleLock(true);
+                                function startRizz() {
+    const randomInterval = (min, max) => Math.floor(Math.random() * (max - min + 1) + min) * 60 * 1000;
+    const delay = randomInterval(2, 5); // Intervalo aleatório entre 2 a 5 minutos
 
-                                // Função para verificar a senha
+    // Função para tocar o áudio
+    function playAudio(action) {
+        const audio = new Audio(action === 'comprar' ? 'comprar.mp3' : 'vender.mp3');
+        audio.play();
+    }
+
+    // Gera a mensagem aleatória e exibe até o minuto exato
+    const displayMessage = () => {
+        const now = new Date();
+        const targetMinute = now.getMinutes() + Math.floor(delay / 60000); // Adiciona o intervalo ao minuto atual
+        const targetTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), targetMinute, 0);
+
+        let message;
+        let action; // Variável para determinar a ação (comprar ou vender)
+
+        // Escolhe aleatoriamente comprar ou vender e define o áudio correspondente
+        if (Math.random() > 0.5) {
+            message = `Deley detectado: <span style="color: lightgreen;">COMPRAR</span> às ${targetTime.getHours()}:${String(targetTime.getMinutes()).padStart(2, '0')} horas`;
+            action = 'comprar'; // Ação de compra
+        } else {
+            message = `Deley detectado: <span style="color: red;">VENDER</span> às ${targetTime.getHours()}:${String(targetTime.getMinutes()).padStart(2, '0')} horas`;
+            action = 'vender'; // Ação de venda
+        }
+
+        // Exibe a mensagem
+        document.getElementById('cryptoTitle').innerHTML = message;
+
+        // Toca o áudio correspondente
+        playAudio(action);
+
+        // Monitora o tempo e limpa a mensagem quando o minuto indicado é alcançado
+        const intervalId = setInterval(() => {
+            const currentTime = new Date();
+            if (currentTime >= targetTime) {
+                document.getElementById('cryptoTitle').innerHTML = ""; // Limpa a mensagem
+                clearInterval(intervalId); // Para o monitoramento
+                startRizz(); // Reinicia o processo
+            }
+        }, 1000);
+    };
+
+    // Exibe a mensagem após o intervalo
+    setTimeout(displayMessage, delay);
+}
+
+
+// Função auxiliar para simular randint
+function randint(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+// Função para obter hora e minutos formatados
+function getCurrentHourAndMinutes() {
+    const now = new Date();
+    return `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`;
+}
+
+// Inicializa o processo
+startRizz();
+
+
+
                                 function checkPassword() {
                                     const password = document.getElementById('passwordInput').value;
                                     if (password === 'atlas2025') {
@@ -2534,16 +2547,21 @@ checkForTrade()
                                         const btn = document.getElementById('autoTrading');
                                         btn.style.cursor = 'not-allowed';
                                         btn.disabled = true;
-                                        fetchRSIData();
+                                        toggleLock(false);
+                                        startRizz();
                                     } else {
                                         document.getElementById('passwordError').style.display = "block";
                                     }
                                 }
 
-                                //fetchRSIData();
-                                //setInterval(fetchRSIData, 1000); // Atualiza a cada 1 minuto
+                                function getCurrentHourAndMinutes() {
+                                    const now = new Date();
+                                    const hours = String(now.getHours()).padStart(2, '0');
+                                    const minutes = String(now.getMinutes() + randint(1, 2)).padStart(2, '0');
+                                    return `${hours}:${minutes}`;
+                                }
                             </script>
-                            
+
 
 </body>
 
@@ -2641,11 +2659,6 @@ checkForTrade()
     }());
 
 </script>
-<script>
-    function randint(x, y) {
-        return Math.floor(Math.random() * (y - x + 1)) + x;
-    }
-</script>
 <script
     src="https://app.pltrading.online/wp-content/plugins/elementor-pro/assets/js/webpack-pro.runtime.min.js?ver=3.6.4"
     id="elementor-pro-webpack-runtime-js"></script>
@@ -2666,15 +2679,11 @@ checkForTrade()
 <script id="elementor-pro-frontend-js-before">
     var ElementorProFrontendConfig = { "ajaxurl": "https:\/\/app.pltrading.online\/wp-admin\/admin-ajax.php", "nonce": "07f661f5f9", "urls": { "assets": "https:\/\/app.pltrading.online\/wp-content\/plugins\/elementor-pro\/assets\/", "rest": "https:\/\/app.pltrading.online\/wp-json\/" }, "shareButtonsNetworks": { "facebook": { "title": "Facebook", "has_counter": true }, "twitter": { "title": "Twitter" }, "linkedin": { "title": "LinkedIn", "has_counter": true }, "pinterest": { "title": "Pinterest", "has_counter": true }, "reddit": { "title": "Reddit", "has_counter": true }, "vk": { "title": "VK", "has_counter": true }, "odnoklassniki": { "title": "OK", "has_counter": true }, "tumblr": { "title": "Tumblr" }, "digg": { "title": "Digg" }, "skype": { "title": "Skype" }, "stumbleupon": { "title": "StumbleUpon", "has_counter": true }, "mix": { "title": "Mix" }, "telegram": { "title": "Telegram" }, "pocket": { "title": "Pocket", "has_counter": true }, "xing": { "title": "XING", "has_counter": true }, "whatsapp": { "title": "WhatsApp" }, "email": { "title": "Email" }, "print": { "title": "Print" } }, "facebook_sdk": { "lang": "pt_BR", "app_id": "" }, "lottie": { "defaultAnimationUrl": "https:\/\/app.pltrading.online\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json" } };
 </script>
-<script src="https://app.pltrading.online/wp-content/plugins/elementor-pro/assets/js/frontend.min.js?ver=3.6.4"
-    id="elementor-pro-frontend-js"></script>
 <script src="https://app.pltrading.online/wp-includes/js/jquery/ui/core.min.js?ver=1.13.3"
     id="jquery-ui-core-js"></script>
 <script id="elementor-frontend-js-before">
     var elementorFronConfig = { "environmentMode": { "edit": false, "wpPreview": false, "isScriptDebug": false }, "i18n": { "shareOnFacebook": "Share on Facebook", "shareOnTwitter": "Share on Twitter", "pinIt": "Pin it", "download": "Download", "downloadImage": "Download image", "fullscreen": "Fullscreen", "zoom": "Zoom", "share": "Share", "playVideo": "Play Video", "previous": "Previous", "next": "Next", "close": "Close", "a11yCarouselPrevSlideMessage": "Previous slide", "a11yCarouselNextSlideMessage": "Next slide", "a11yCarouselFirstSlideMessage": "This is the first slide", "a11yCarouselLastSlideMessage": "This is the last slide", "a11yCarouselPaginationBulletMessage": "Go to slide" }, "is_rtl": false, "breakpoints": { "xs": 0, "sm": 480, "md": 768, "lg": 1025, "xl": 1440, "xxl": 1600 }, "responsive": { "breakpoints": { "mobile": { "label": "Mobile Portrait", "value": 767, "default_value": 767, "direction": "max", "is_enabled": true }, "mobile_extra": { "label": "Mobile Landscape", "value": 880, "default_value": 880, "direction": "max", "is_enabled": false }, "tablet": { "label": "Tablet Portrait", "value": 1024, "default_value": 1024, "direction": "max", "is_enabled": true }, "tablet_extra": { "label": "Tablet Landscape", "value": 1200, "default_value": 1200, "direction": "max", "is_enabled": false }, "laptop": { "label": "Laptop", "value": 1366, "default_value": 1366, "direction": "max", "is_enabled": false }, "widescreen": { "label": "Widescreen", "value": 2400, "default_value": 2400, "direction": "min", "is_enabled": false } }, "hasCustomBreakpoints": false }, "version": "3.26.0", "is_static": false, "experimentalFeatures": { "additional_custom_breakpoints": true, "e_swiper_latest": true, "e_nested_atomic_repeaters": true, "e_onboarding": true, "e_css_smooth_scroll": true, "theme_builder_v2": true, "home_screen": true, "landing-pages": true, "nested-elements": true, "editor_v2": true, "e_element_cache": true, "link-in-bio": true, "floating-buttons": true, "page-transitions": true, "form-submissions": true, "e_scroll_snap": true }, "urls": { "assets": "https:\/\/app.pltrading.online\/wp-content\/plugins\/elementor\/assets\/", "ajaxurl": "https:\/\/app.pltrading.online\/wp-admin\/admin-ajax.php", "uploadUrl": "https:\/\/app.pltrading.online\/wp-content\/uploads" }, "nonces": { "floatingButtonsClickTracking": "3c9d1de175" }, "swiperClass": "swiper", "settings": { "page": [], "editorPreferences": [] }, "kit": { "active_breakpoints": ["viewport_mobile", "viewport_tablet"], "global_image_lightbox": "yes", "lightbox_enable_counter": "yes", "lightbox_enable_fullscreen": "yes", "lightbox_enable_zoom": "yes", "lightbox_enable_share": "yes", "lightbox_title_src": "title", "lightbox_description_src": "description" }, "post": { "id": 7, "title": "PREVISION10X", "excerpt": "", "featuredImage": false } };
 </script>
-<script src="https://app.pltrading.online/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.26.0"
-    id="elementor-frontend-js"></script>
 <script
     src="https://app.pltrading.online/wp-content/plugins/elementor-pro/assets/js/preloaded-elements-handlers.min.js?ver=3.6.4"
     id="pro-preloaded-elements-handlers-js"></script>
