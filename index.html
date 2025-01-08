@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>ATLAS PREVISION</title>
+    <title>PREVISION10x</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name='robots' content='max-image-preview:large' />
     <style>
@@ -11,7 +11,7 @@
             contain-intrinsic-size: 3000px 1500px
         }
     </style>
-    <title>ATLAS</title>
+    <title>PREVISION10X</title>
     <link rel="alternate" type="application/rss+xml" title="Feed para PREVISION10X &raquo;"
         href="https://app.pltrading.online/feed/" />
     <link rel="alternate" type="application/rss+xml" title="Feed de comentários para PREVISION10X &raquo;"
@@ -1828,7 +1828,7 @@
                                     </header>
                                     <div class="menu-app-container-fixed">
                                         <nav class="menu-app-nav-fixed">
-                                            <a href="https://t.me/suportePLtrader" class="menu-app-item-fixed">
+                                            <a href="https://t.me/suporte_10x" class="menu-app-item-fixed">
                                                 <span class="menu-app-icon-fixed">💡</span>
                                                 <span class="menu-app-text-fixed">SUPORTE</span>
                                             </a>
@@ -1895,7 +1895,7 @@
                                     <p>✅ GRUPO DOS SÓCIOS/MENTORIA</p>
                                     <p>✅ IA COM DELAY</p>
                                     <p>OBS: O ATIVO SOLANA ESTÁ LIBERADO GRÁTIS PRA TESTE</p>
-                                    <a href="https://pay.kirvano.com/91ddcb31-0b65-4399-95f8-b755002cf4fb"
+                                    <a href="https://t.me/suporte_10x"
                                         target="_blank">
                                         <button>Ativar Servidor</button>
                                     </a>
@@ -2206,7 +2206,7 @@
                                     <input type="password" id="passwordInput" class="password-input"
                                         placeholder="Digite o código do servidor" />
                                     <button class="btn" onclick="checkPassword()">Entrar</button>
-                                    <a href="https://pay.kirvano.com/fe72b26f-7ab8-4275-aab0-851f0f705c1f"
+                                    <a href="https://t.me/suporte_10x"
                                         target="_blank">
                                         <button class="btn">ATIVAR SERVIDOR</button>
                                     </a>
@@ -2361,7 +2361,7 @@
                                         setInterval(() => {
                                             index = (index + 1) % delayMessages.length;
                                             document.getElementById("delayy").textContent = delayMessages[index];
-                                        }, randint(18000, 185000));  // A cada aproximadamente 3 minutos
+                                        }, randint(15000, 60000));  // Intervalo entre 15 segundos (15,000 ms) e 1 minuto (60,000 ms)
                                     }
 
                                     // Função para alternar as mensagens de Tendência
@@ -2376,7 +2376,8 @@
                                         setInterval(() => {
                                             index = (index + 1) % trendMessages.length;
                                             document.getElementById("tendenciaa").textContent = trendMessages[index];
-                                        }, randint(180000, 185000));  // A cada aproximadamente 3 minutos
+                                        }, randint(15000, 60000));  // Intervalo entre 15 segundos (15,000 ms) e 1 minuto (60,000 ms)
+
                                     }
 
                                     updateDelay();
@@ -2475,7 +2476,7 @@
                                 toggleLock(true);
                                 function startRizz() {
     const randomInterval = (min, max) => Math.floor(Math.random() * (max - min + 1) + min) * 60 * 1000;
-    const delay = randomInterval(2, 5); // Intervalo aleatório entre 2 a 5 minutos
+    const delay = randomInterval(1, 2); // Intervalo aleatório entre 2 a 5 minutos
 
     // Função para tocar o áudio
     function playAudio(action) {
@@ -2494,10 +2495,10 @@
 
         // Escolhe aleatoriamente comprar ou vender e define o áudio correspondente
         if (Math.random() > 0.5) {
-            message = `Deley detectado: <span style="color: lightgreen;">COMPRAR</span> às ${targetTime.getHours()}:${String(targetTime.getMinutes()).padStart(2, '0')} horas`;
+            message = `Deley detectado: <span style="color: lightgreen;">COMPRAR</span> às ${targetTime.getHours()}:${String(targetTime.getMinutes()).padStart(2, '0')}`;
             action = 'comprar'; // Ação de compra
         } else {
-            message = `Deley detectado: <span style="color: red;">VENDER</span> às ${targetTime.getHours()}:${String(targetTime.getMinutes()).padStart(2, '0')} horas`;
+            message = `Deley detectado: <span style="color: red;">VENDER</span> às ${targetTime.getHours()}:${String(targetTime.getMinutes()).padStart(2, '0')}`;
             action = 'vender'; // Ação de venda
         }
 
